@@ -1,5 +1,8 @@
 class Admin::ProductsController < ApplicationController
 
+	before_action :authenticate_user!
+	before_action :required_admin
+
 	def index
 		@products = Product.all
 	end
@@ -23,7 +26,7 @@ class Admin::ProductsController < ApplicationController
 
 	def update
 		@product = Product.find(params[:id])
-		if @product.update
+		if @product.update(params_product)
 			redirect_to admin_products_path
 		else
 			render :edit
@@ -44,5 +47,12 @@ class Admin::ProductsController < ApplicationController
 
 	def params_product
 		params.require(:product).permit(:title, :description, :price, :quantity)
+	end
+
+	def required_admin
+		if !current_user.admin?
+			redirect_to "/"
+			flash[:notice] = "你不是管理员"
+		end
 	end
 end
