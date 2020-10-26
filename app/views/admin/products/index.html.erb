@@ -1,0 +1,32 @@
+
+
+<div class="admin-products-index">
+	<div class="container-fluid">
+		<div class="page-header">
+			<%= link_to("新增商品", new_admin_product_path, class: "btn btn-raised btn-success pull-right") %>
+		</div>
+		<div class="panel panel-default">
+			<table class="table table-shopping">
+				<thead>
+					<th>#</th>
+					<th>商品描述</th>
+					<th>价格</th>
+					<th>数量</th>
+					<th>操作</th>
+				</thead>
+				<% @products.each do |product| %>
+                  <tr>
+                  	<td><%= product.id %></td>
+                  	<td><%= link_to(product.title, admin_product_path(product)) %></td>
+                  	<td><%= product.price %></td>
+                  	<td><%= product.quantity %></td>
+                  	<td>
+                  		<%= link_to("编辑", edit_admin_product_path(product)) %> |
+                  		<%= link_to("删除", admin_product_path(product), :method => :delete) %>
+                  	</td>
+                  </tr>
+				<% end %>
+			</table>
+		</div>
+	</div>
+</div>
