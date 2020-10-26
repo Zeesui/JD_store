@@ -6,6 +6,12 @@
 	<%= f.input :price, label: "价格" %>
 	<%= f.input :quantity, label: "数量" %>
 
+	<% if @product.image.present? %>
+		<%= image_tag(@product.image.thumb.url) %>
+	<% end %>
+
+	<%= f.input :image, ad: :file, label: "上传图片" %>
+
 	<%= f.submit "编辑", data: {disable_with: "编辑.."} %>
 	<%= link_to("取消", :back, class: "btn btn-sm btn-default") %>
 	<% end %>
