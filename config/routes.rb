@@ -14,4 +14,10 @@ Rails.application.routes.draw do
 	end
 
 	resources :carts
+
+	resources :cart_items do
+		collection do
+			delete :cart_items_clean
+		end
+	end
 end

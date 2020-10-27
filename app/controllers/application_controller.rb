@@ -6,6 +6,10 @@ class ApplicationController < ActionController::Base
 		@current_cart ||= find_cart
 	end
 
+	def back_url
+		redirect_back fallback_location: root_path
+	end
+
 	private
 
 	def find_cart

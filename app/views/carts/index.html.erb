@@ -1,7 +1,13 @@
 
 <div class="row">
 	<div class="col-md-12">
-		<h2>购物车</h2>
+		<h2>购物车</h2>	
+		<div class="cart-header">
+
+		<%= link_to("清空购物车", cart_items_clean_cart_items_path, method: :delete, class: "btn btn-danger pull-right") %>
+		</div>
+		<br>
+		<br>
 		<table class="table table-bordered">
 	<thead>
 		<th colspan="2">商品资讯</th>
@@ -24,7 +30,7 @@
            	<td><%= link_to(cart_item.product.title, product_path(cart_item.product)) %></td>
            	<td><%= cart_item.product.price %></td>
            	<td><%= cart_item.quantity %></td>
-           	<td><%= link_to("删除", '#', :method => :delete) %></td>
+           	<td><%= link_to("删除", cart_item_path(cart_item.product_id), :method => :delete) %></td>
            </tr>	
 		<% end %>
 	</tbody>
