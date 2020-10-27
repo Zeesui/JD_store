@@ -1,7 +1,7 @@
 
 <div class="row">
 	<div class="col-md-12">
-		<h2>购物车</h2>	
+		<h2>购物车</h2>
 		<div class="cart-header">
 
 		<%= link_to("清空购物车", cart_items_clean_cart_items_path, method: :delete, class: "btn btn-danger pull-right") %>
@@ -10,6 +10,9 @@
 		<br>
 		<table class="table table-shopping">
 	<thead>
+		<th>
+			<input type="checkbox" class="cart-select-all">
+		</th>
 		<th class="text-center"></th>
 		<th width="24%">商品资讯</th>
 		<th>价格</th>
@@ -19,16 +22,73 @@
 
 	</thead>
 	<tbody>
-		<% current_cart.cart_items.each do |cart_item| %>
-           <%= render "carts/cart_content", :cart_item => cart_item %>
+		<% current_cart.cart_items.each_with_index do |cart_item, index| %>
+           <%= render "carts/cart_content", :cart_item => cart_item, :index => index %>
 		<% end %>
 	</tbody>
          </table>
          <hr>
-         <div class="total-price pull-right">
+         <tr>
+         	<td><input type="checkbox" class="cart-select-all"></td>
+         	<td>
+         		 <div class="total-price pull-right">
          	总计：<%= render_cart_total_price(current_cart) %> ¥
-         </div>
+          	     </div>
+         	</td>
+         </tr>
+
 	</div>
 </div>
 
+<script>
+	$(document).on('turbolinks:load', function(){
+		//购物车全选
+		cartSelectAll();
+		//购物车勾选
+		cartItemSelect();
 
+	});
+	//购物车全选
+	function cartSelectAll(){
+		$(".cart-select-all").click(function(){
+
+			var flag = this.checked
+			var items = document.getElementsByName('item_ids[]');
+			for (var i = 0; i < items.length; i++) {
+				items[i].checked = flag;
+			}
+			totalPrice();
+		})
+	}
+
+	//购物车勾选
+	function cartItemSelect(){
+			var items = document.getElementsByName('item_ids[]');
+			for (var i = 0; i < items.length; i++) {
+				items[i].onclick = function(){
+					//记录有几个商品被选中
+					var num = 0;
+					for (var j = 0; j < items.length; j++) {
+						if (items[j].checked){
+							num++;
+						}
+					}
+					$(".cart-select-all").prop("checked", items.length == num);
+					totalPrice();
+				}
+			}
+	}
+
+	//计算总价
+	function totalPrice(){
+		var totalprice = 0;
+		var items = document.getElementsByName('item_ids[]');
+		for (var i = 0; i < items.length; i++) {
+			if (items[i].checked) {
+				totalprice += parseInt($("#item-price-" + i).html());
+			}
+		}
+		$(".total-price").html(totalprice);
+	}
+
+</script>
