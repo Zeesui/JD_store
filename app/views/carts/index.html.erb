@@ -13,25 +13,13 @@
 		<th colspan="2">商品资讯</th>
 		<th>价格</th>
 		<th>数量</th>
+		<th>小计</th>
 		<th>操作</th>
+
 	</thead>
 	<tbody>
 		<% current_cart.cart_items.each do |cart_item| %>
-           <tr>
-           	<td>
-           		<%= link_to product_path(cart_item.product) do %>
-                    <% if cart_item.product.image.present? %>
-                    	<%= image_tag(cart_item.product.image.thumb.url, class: "thumbnail") %>
-                    	<% else %>
-                    	 <%= image_tag("http://placehold.it/200x200&text=No Pic", class: "thumbnail") %>
-                    <% end %>
-           		<% end %>
-           	</td>
-           	<td><%= link_to(cart_item.product.title, product_path(cart_item.product)) %></td>
-           	<td><%= cart_item.product.price %></td>
-           	<td><%= cart_item.quantity %></td>
-           	<td><%= link_to("删除", cart_item_path(cart_item.product_id), :method => :delete) %></td>
-           </tr>	
+           <%= render "carts/cart_content", :cart_item => cart_item %>
 		<% end %>
 	</tbody>
 </table>

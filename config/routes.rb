@@ -19,5 +19,9 @@ Rails.application.routes.draw do
 		collection do
 			delete :cart_items_clean
 		end
+		member do
+			post :increase
+			post :decrease
+		end
 	end
 end
