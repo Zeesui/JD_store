@@ -9,7 +9,7 @@
 				<% end %>
 			<% end %>
 			<%= product.title %> ¥ <%= product.price %>
-			 <%= link_to("加入购物车", '#') %>
+			 <%= link_to("加入购物车", add_to_cart_product_path(product), :method => :post) %>
 		</div>
 	<% end %>
 </div>
