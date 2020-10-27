@@ -1,5 +1,6 @@
 //改变购物车商品数量
 $(".cart-item-quantity-<%= @cart_item.id %>").val("<%= @cart_item.quantity %>")
 //重新加载购物车小计
-
 $(".cart-item-price-<%= @cart_item.id %>").html("<%= @cart_item.product.price * @cart_item.quantity %>")
+//重新加载购物车总计
+$(".total-price").html("<%= render_cart_total_price(current_cart) %>")

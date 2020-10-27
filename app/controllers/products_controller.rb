@@ -10,8 +10,14 @@ class ProductsController < ApplicationController
 
 	def add_to_cart
 		@product = Product.find(params[:id])
-		current_cart.add_product_to_cart(@product)
-		redirect_back fallback_location: root_path
+		if !current_cart.cart_items.includes(@product)
+			current_cart.add_product_to_cart(@product)
+			flash[:notice] = "加入购物车"
+		else
+			flash[:notice] = "#{@product.title}商品已经加入购物车"
+		end
+		
+		back_url
 
 	end
 end

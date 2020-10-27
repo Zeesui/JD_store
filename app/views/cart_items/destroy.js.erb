@@ -1,1 +1,3 @@
 $("#cart-item-<%= @cart_item.id %>").remove();
+//重新加载购物车总计
+$(".total-price").html("<%= render_cart_total_price(current_cart) %>")

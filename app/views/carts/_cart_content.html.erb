@@ -1,4 +1,4 @@
-<tr is="cart-item-<%= cart_item.id %>">
+<tr id="cart-item-<%= cart_item.id %>">
            	<td>
            		<%= link_to product_path(cart_item.product) do %>
                     <% if cart_item.product.image.present? %>

@@ -8,9 +8,10 @@
 		</div>
 		<br>
 		<br>
-		<table class="table table-bordered">
+		<table class="table table-shopping">
 	<thead>
-		<th colspan="2">商品资讯</th>
+		<th class="text-center"></th>
+		<th width="24%">商品资讯</th>
 		<th>价格</th>
 		<th>数量</th>
 		<th>小计</th>
@@ -22,7 +23,11 @@
            <%= render "carts/cart_content", :cart_item => cart_item %>
 		<% end %>
 	</tbody>
-</table>
+         </table>
+         <hr>
+         <div class="total-price pull-right">
+         	总计：<%= render_cart_total_price(current_cart) %> ¥
+         </div>
 	</div>
 </div>
 
