@@ -11,7 +11,7 @@
 		<table class="table table-shopping">
 	<thead>
 		<th>
-			<input type="checkbox" class="cart-select-all">
+			<input type="checkbox" class="cart-select-all">全选
 		</th>
 		<th class="text-center"></th>
 		<th width="24%">商品资讯</th>
@@ -29,16 +29,17 @@
          </table>
          <hr>
          <tr>
-         	<td><input type="checkbox" class="cart-select-all"></td>
+         	<td><input type="checkbox" class="cart-select-all">全选</td>
          	<td colspan="1">
 						<span class="total-price pull-right">
 							0
 						</span>
-
-
          	</td>
          </tr>
-
+				 <hr>
+				 <div class="checkout">
+				 		<%= link_to("去结算", '#', method: :post, class: "btn btn-danger btn-lg pull-right") %>
+				 </div>
 	</div>
 </div>
 
@@ -59,6 +60,7 @@
 			for (var i = 0; i < items.length; i++) {
 				items[i].checked = flag;
 			}
+			//重新计算总价
 			totalPrice();
 		})
 	}
