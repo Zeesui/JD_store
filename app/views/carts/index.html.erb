@@ -8,6 +8,8 @@
 		</div>
 		<br>
 		<br>
+
+		<%= form_for current_cart, url: checkout_carts_path(current_cart), :method => :post do |f| %>
 		<table class="table table-shopping">
 	<thead>
 		<th>
@@ -38,8 +40,9 @@
          </tr>
 				 <hr>
 				 <div class="checkout">
-				 		<%= link_to("去结算", checkout_carts_path, method: :post, class: "btn btn-danger btn-lg pull-right") %>
+				 		<%= f.button "去结算", type: :submit, value: true, class: "btn btn-danger btn-lg pull-right" %>
 				 </div>
+				 <% end %>
 	</div>
 </div>
 

@@ -21,11 +21,13 @@ Rails.application.routes.draw do
 	end
 
 
-	resources :cart_items do
-		
+	resources :cart_items do		
 		member do
 			post :increase
 			post :decrease
 		end
 	end
+
+	resources :orders
+	
 end
