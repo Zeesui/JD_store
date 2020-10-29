@@ -2,6 +2,7 @@
 	<div class="col-md-12">
 		<h2>购物明细</h2>
 
+      <%= simple_form_for @order do |f| %>
 		<table class="table table-bordered">
       <thead>
         <tr>
@@ -15,6 +16,7 @@
 
         <% @items.each do |cart_item| %>
           <tr>
+            <input type="hidden" name="items[]" value="<%= cart_item.id %>">
             <td>
               <%= link_to(cart_item.product.title, product_path(cart_item.product)) %>
             </td>
@@ -42,7 +44,7 @@
     <hr>
     <h2>订单资讯</h2>
     <div class="order-form">
-    	<%= simple_form_for @order do |f| %>
+    
           <div class="form-group col-md-4">
           	<%= f.input :name, label: "收货人姓名" %>
           </div>
