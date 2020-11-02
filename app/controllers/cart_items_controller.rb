@@ -1,15 +1,17 @@
 class CartItemsController < ApplicationController
 
 	def destroy
-		@cart_item = current_cart.cart_items.find_by(product_id: params[:id])
+		@cart = current_cart
+		@cart_item = @cart.cart_items.find_by(product_id: params[:id])
 		@cart_item.destroy
 	#	back_url
 	end
 
-	
+
 
 	def increase
-		@cart_item = current_cart.cart_items.find_by(product_id: params[:id])
+		@cart = current_cart
+		@cart_item = @cart.cart_items.find_by(product_id: params[:id])
 		@quantity = @cart_item.quantity
 		if @quantity < @cart_item.product.quantity
 			@cart_item.change_quantity(1)
@@ -18,7 +20,8 @@ class CartItemsController < ApplicationController
 	end
 
 	def decrease
-		@cart_item = current_cart.cart_items.find_by(product_id: params[:id])
+		@cart = current_cart
+		@cart_item = @cart.cart_items.find_by(product_id: params[:id])
 		@quantity = @cart_item.quantity
 		if @quantity > 1
 			@cart_item.change_quantity(-1)
@@ -39,5 +42,5 @@ class CartItemsController < ApplicationController
 		params.require(:cart_item).permit(:quantity)
 	end
 
-	
+
 end

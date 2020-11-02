@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 	end
 
 
-	resources :cart_items do		
+	resources :cart_items do
 		member do
 			post :increase
 			post :decrease
@@ -38,5 +38,5 @@ Rails.application.routes.draw do
 	namespace :account do
 		resources :orders
 	end
-	
+
 end

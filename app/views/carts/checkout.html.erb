@@ -16,7 +16,10 @@
 
         <% @items.each do |cart_item| %>
           <tr>
-            <input type="hidden" name="items[]" value="<%= cart_item.id %>">
+
+							<input type="hidden" name="items[]" value="<%= cart_item.id %>">
+
+
             <td>
               <%= link_to(cart_item.product.title, product_path(cart_item.product)) %>
             </td>
@@ -44,7 +47,7 @@
     <hr>
     <h2>订单资讯</h2>
     <div class="order-form">
-    
+
           <div class="form-group col-md-4">
           	<%= f.input :name, label: "收货人姓名" %>
           </div>

@@ -14,13 +14,11 @@
            	<td><%= link_to(cart_item.product.title, product_path(cart_item.product)) %></td>
            	<td><%= cart_item.product.price %></td>
            	<td >
-                <input type="text" name="quantities[]" value="<%= cart_item.quantity %>" class="cart-item-quantity-<%= cart_item.id %> " disabled >
+                <input type="text" name="quantities" value="<%= cart_item.quantity %>" class="cart-item-quantity-<%= cart_item.id %> " disabled >
            		<%= link_to decrease_cart_item_path(cart_item.product.id), :remote => true, method: :post, class: "btn btn-round btn-info btn-xs"  do%>
            		<i class="material-icons">remove</i>
            		<% end %>
-           		<%= link_to increase_cart_item_path(cart_item.product.id), :remote => true, method: :post, class: "btn btn-round btn-info btn-xs" do %>
-           		<i class="material-icons">add</i>
-           		<% end %>
+           		<%= link_to("+", increase_cart_item_path(cart_item.product_id), :method => :post, :remote => true, class: "btn btn-default") %>
            		</td>
            	<td class="cart-item-price-<%= cart_item.id %>" id="item-price-<%= index %>">
            		<%= cart_item.quantity * cart_item.product.price %>
