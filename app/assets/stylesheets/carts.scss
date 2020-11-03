@@ -1,3 +1,32 @@
 // Place all the styles related to the carts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+
+
+.carts-index {
+  margin-top: 0;
+  background-color:  #E0E0E0;
+}
+.card {
+  margin: 50px;
+  padding:30px 50px;
+  border-radius: 5px;
+  background-color:#ECEFF1;
+}
+.thumbnail-carts {
+  padding: 0px;
+  width: 80;
+  max-height: 80px;
+
+}
+.table-bordered {
+  .tbody {
+
+    .tr{
+      padding-bottom: 20px;
+
+    }
+  }
+}

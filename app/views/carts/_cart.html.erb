@@ -1,0 +1,36 @@
+<div class="cart-card">
+  <%= form_for current_cart, url: checkout_carts_path(current_cart), :method => :get do |f| %>
+<table class="table table-shopping">
+<thead>
+<th>
+  <input type="checkbox" class="cart-select-all">全选
+</th>
+<th class="text-center"></th>
+<th width="24%">商品资讯</th>
+<th>价格</th>
+<th>数量</th>
+<th>小计</th>
+<th>操作</th>
+
+</thead>
+<tbody>
+<% current_cart.cart_items.each_with_index do |cart_item, index| %>
+       <%= render "cart_content", cart_item: cart_item, index: index %>
+<% end %>
+</tbody>
+     </table>
+     <hr style="margin-top: -15px;">
+     <tr>
+      <td><input type="checkbox" class="cart-select-all">全选</td>
+      <td colspan="1">
+        <span class="total-price pull-right">
+          0
+        </span>
+      </td>
+     </tr>
+     <hr >
+     <div class="checkout">
+        <%= f.button "去结算", type: :submit, value: true, class: "btn btn-danger btn-lg pull-right" %>
+     </div>
+     <% end %>
+</div>

@@ -1,47 +1,20 @@
 
-<div class="row">
+<div class="row carts-index">
 	<div class="col-md-12">
-		<h2>购物车</h2>
-		<div class="cart-header">
+		<div class="card container">
+			<h2>购物车</h2>
+			<div class="cart-header">
 
-		<%= link_to("清空购物车", cart_items_clean_carts_path, method: :delete, class: "btn btn-danger pull-right") %>
+			<%= link_to("清空购物车", cart_items_clean_carts_path, method: :delete, class: "btn btn-danger pull-right") %>
+			</div>
+			<br>
+			<br>
+			<div class="cart-card">
+					<%= render "cart" %>
+			</div>
+
 		</div>
-		<br>
-		<br>
-			<%= form_for current_cart, url: checkout_carts_path(current_cart), :method => :get do |f| %>
-		<table class="table table-shopping">
-	<thead>
-		<th>
-			<input type="checkbox" class="cart-select-all">全选
-		</th>
-		<th class="text-center"></th>
-		<th width="24%">商品资讯</th>
-		<th>价格</th>
-		<th>数量</th>
-		<th>小计</th>
-		<th>操作</th>
 
-	</thead>
-	<tbody>
-		<% current_cart.cart_items.each_with_index do |cart_item, index| %>
-           <%= render "cart_content", cart_item: cart_item, index: index %>
-		<% end %>
-	</tbody>
-         </table>
-         <hr>
-         <tr>
-         	<td><input type="checkbox" class="cart-select-all">全选</td>
-         	<td colspan="1">
-						<span class="total-price pull-right">
-							0
-						</span>
-         	</td>
-         </tr>
-				 <hr>
-				 <div class="checkout">
-				 		<%= f.button "去结算", type: :submit, value: true, class: "btn btn-danger btn-lg pull-right" %>
-				 </div>
-				 <% end %>
 	</div>
 </div>
 

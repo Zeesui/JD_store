@@ -1,13 +1,13 @@
-<tr id="cart-item-<%= cart_item.id %>">
+<tr id="cart-item-<%= cart_item.id %>" >
   <td>
     <input type="checkbox" name="item_ids[]" value="<%= cart_item.id %>">
   </td>
            	<td>
            		<%= link_to product_path(cart_item.product) do %>
                     <% if cart_item.product.image.present? %>
-                    	<%= image_tag(cart_item.product.image.thumb.url, class: "thumbnail") %>
+                    	<%= image_tag(cart_item.product.image.thumb.url, class: "thumbnail-carts") %>
                     	<% else %>
-                    	 <%= image_tag("http://placehold.it/200x200&text=No Pic", class: "thumbnail") %>
+                    	 <%= image_tag("http://placehold.it/200x200&text=No Pic", class: "thumbnail-carts") %>
                     <% end %>
            		<% end %>
            	</td>
@@ -18,7 +18,7 @@
            		<%= link_to decrease_cart_item_path(cart_item.product.id), :remote => true, method: :post, class: "btn btn-round btn-info btn-xs"  do%>
            		<i class="material-icons">remove</i>
            		<% end %>
-           		<%= link_to("+", increase_cart_item_path(cart_item.product_id), :method => :post, :remote => true, class: "btn btn-default") %>
+           		<%= link_to("+", increase_cart_item_path(cart_item.product_id), :method => :post, :remote => true, class: "btn btn-default btn-sm") %>
            		</td>
            	<td class="cart-item-price-<%= cart_item.id %>" id="item-price-<%= index %>">
            		<%= cart_item.quantity * cart_item.product.price %>
