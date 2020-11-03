@@ -1,5 +1,12 @@
 class ApplicationController < ActionController::Base
 
+	def required_admin
+		if !current_user.admin?
+			redirect_to "/"
+			flash[:notice] = "你不是管理员"
+		end
+	end
+
 	helper_method :current_cart
 
 	def current_cart
@@ -17,7 +24,7 @@ class ApplicationController < ActionController::Base
 		if cart.blank?
 			cart = Cart.create
 		end
-		session[:cart_id] = cart.id 
+		session[:cart_id] = cart.id
 		return cart
 	end
 end
