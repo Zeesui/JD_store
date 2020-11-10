@@ -9,8 +9,8 @@
   <% when "applying_to_cancell" %>
   <%= link_to("允许退货", return_admin_order_path(order), class: "btn btn-default btn-sm", method: :post) %>
 
-  <% when "shipped" %>
-  <span class="label lable-default">等待确认收货</span>
+  <% when "shipping" %>
+  <span class="label label-default">等待确认收货</span>
 
   <% when "order_cancelled" %>
   <span class="label label-default">订单已取消</span>

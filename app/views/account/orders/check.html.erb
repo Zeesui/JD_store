@@ -1,0 +1,30 @@
+
+
+<table class="table table-shipping">
+	<thead>
+		<tr>
+			<th>#</th>
+			<th>Created</th>
+			<th>订单状态</th>
+			<th>Option</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @orders.each do |order| %>
+    <tr>
+      <td> <%= link_to(order.id, order_path(order.token)) %> </td>
+      <td> <%= order.created_at.to_s(:db) %> </td>
+			<td>
+				<% if order.is_paid? %>
+				 <%= render_order_paid_state(order) %>
+				 <% else %>
+				  <%= render_order_paid_state(order) %> (<%= link_to("去付款", order_path(order.token)) %>)
+				 <% end %>
+			 </td>
+			<td >
+				<%= render "account/orders/state_option", order: order %>
+			</td>
+    </tr>
+    <% end %>
+	</tbody>
+</table>
