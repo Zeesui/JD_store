@@ -20,31 +20,49 @@ class Order < ApplicationRecord
 
 	aasm do
 		state :order_placed, initial: true
-		state :paid
-		state :shipping
-		state :shipped
-		state :order_cancelled
-		state :good_returned
+		state :paid		   #付款
+		state :shipping	 #出货
+		state :shipped	 #到货
+		state :apply_ship   #确认收货
+		state :applying_to_cancell  #申请退货
+		state :order_cancelled			#取消订单
+		state :good_returned				#允许退货
 
 		event :make_payment, after_commit: :pay! do
 			transitions from: :order_placed, to: :paid
 		end
 
+		#取消订单
+		event :cancell_order do
+			transitions from: :order_placed, to: :order_cancelled
+		end
+
+		#出货
 		event :ship do
 			transitions from: :paid, to: :shipping
 		end
 
-		event :deliver do
-			transitions from: :shipping, to: :shipped
+		# #到货
+		# event :deliver do
+		# 	transitions from: :shipping, to: :shipped
+		# end
+
+		#确认收货
+		event :good_shipped do
+			transitions from: :shipping, to: :apply_ship
 		end
 
+    #申请退货
+		event :apply_to_cancelled do
+			transitions from: [:paid, :shipping], to: :applying_to_cancell
+		end
+
+		#允许退货
 		event :return_good do
-			transitions from: :shipped, to: :good_returned
+			transitions from: :applying_to_cancell, to: :good_returned
 		end
 
-		event :cancel_order do
-			transitions from: [:order_placed, :paid], to: :order_cancelled
-		end
+
 	end
 
 end

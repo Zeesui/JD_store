@@ -12,24 +12,14 @@ class Admin::OrdersController < ApplicationController
     @product_lists = @order.product_lists
   end
 
+  #出货
   def ship
     @order = Order.find(params[:id])
     @order.ship!
     back_url
   end
 
-  def shipped
-    @order = Order.find(params[:id])
-    @order.deliver!
-    back_url
-  end
-
-  def cancel
-    @order = Order.find(params[:id])
-    @order.cancel_order!
-    back_url
-  end
-
+  #允许退货
   def return
     @order = Order.find(params[:id])
     @order.return_good!

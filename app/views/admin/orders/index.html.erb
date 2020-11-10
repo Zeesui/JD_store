@@ -7,15 +7,17 @@
       <th>生成时间</th>
       <th>订购者</th>
       <th>订单状态</th>
+      <th>操作</th>
     </tr>
   </thead>
   <tbody>
     <% @orders.each do |order| %>
     <tr>
       <td> <%= link_to(order.id, admin_order_path(order) ) %> </td>
-      <td> <%= order.created_at.to_s(:long) %> </td>
+      <td> <%= order.created_at.localtime.to_s(:db) %> </td>
       <td> <%= order.user.email %></td>
-      <td> <%= order.aasm_state %> </td>
+      <td>  <%= render_order_paid_state(order) %> </td>
+      <td><%= render "admin/orders/state_option", order: order %></td>
     </tr>
     <% end %>
 

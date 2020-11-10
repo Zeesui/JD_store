@@ -7,9 +7,9 @@ Rails.application.routes.draw do
 		resources :products
     resources :orders do
       member do
-        post :cancel
+
         post :ship
-        post :shipped
+
         post :return
       end
     end
@@ -40,11 +40,18 @@ Rails.application.routes.draw do
 		member do
 			post :pay_with_alipay
 			post :pay_with_wechat
+
 		end
 	end
 
 	namespace :account do
-		resources :orders
+		resources :orders do
+      member do
+        post :apply_to_cancell
+        post :cancell
+        post :order_commit
+      end
+    end
 	end
 
 end
