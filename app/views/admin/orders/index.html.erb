@@ -1,25 +1,48 @@
 <h2>订单列表 </h2>
 
-<table class="table table-bordered">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>生成时间</th>
-      <th>订购者</th>
-      <th>订单状态</th>
-      <th>操作</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @orders.each do |order| %>
-    <tr>
-      <td> <%= link_to(order.id, admin_order_path(order) ) %> </td>
-      <td> <%= order.created_at.localtime.to_s(:db) %> </td>
-      <td> <%= order.user.email %></td>
-      <td>  <%= render_order_paid_state(order) %> </td>
-      <td><%= render "admin/orders/state_option", order: order %></td>
-    </tr>
-    <% end %>
+<div class="row order-group">
+	<div class="col-md-12">
+		<div class="container">
+			<h2>订单列表</h2>
+			<% @orders.each do |order| %>
+			<div class="panel panel-default order-panel">
+				<table class="table table-shipping order-table" >
+						<span>
+							<small>订单编号：<%= order.token %> </small>
+							<small style="margin-left: 50px; margin-right: 50px;">下单时间：<%= order.created_at.to_s(:db) %></small>
+							<small><%= link_to("订单详情", order_path(order)) %></small>
+							<small style="margin-left: 50px;">
+								<% if order.is_paid? %>
+								 <%= render_order_paid_state(order) %>： <%= render "admin/orders/state_option", order: order %>
+								 <% else %>
+								  <%= render_order_paid_state(order) %>
+								 <% end %>
+							</small>
+						</span>
+				  <thead>
+				    <tr>
+				      <th>商品资讯</th>
+				      <th>价格</th>
+				      <th>数量</th>
 
-  </tbody>
-</table>
+				    </tr>
+				  </thead>
+				  <tbody>
+						<% order.product_lists.each do |product_list| %>
+				    <tr>
+				      <td>
+								<%= product_list.product_name %>
+							</td>
+				      <td><%= product_list.product_price %></td>
+				      <td><%= product_list.quantity %></td>
+
+				    </tr>
+
+						<% end %>
+				  </tbody>
+				</table>
+			</div>
+			<% end %>
+		</div>
+	</div>
+</div>

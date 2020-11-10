@@ -2,8 +2,6 @@
 	<div class="col-md-12">
 		<h2>订单明细</h2>
 
-
-
 		<table class="table table-shopping">
       <thead>
         <tr>
@@ -58,7 +56,7 @@
     </table>
 
     <hr>
-	
+
     <% if !@order.is_paid?  %>
     <div class="group pull-right">
       <%= link_to("支付宝支付", pay_with_alipay_order_path(@order.token), :method => :post, class: "btn btn-danger") %>

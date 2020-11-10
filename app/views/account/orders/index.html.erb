@@ -4,34 +4,44 @@
 		<div class="container">
 			<h2>订单列表</h2>
 			<% @orders.each do |order| %>
-			<div class="panel panel-default">
-				<table class="table table-shipping" >
-						<span>订单编号：<%= order.token %></span>
+			<div class="panel panel-default order-panel">
+				<table class="table table-shipping order-table" >
+						<span>
+							<small>订单编号：<%= order.token %> </small>
+							<small style="margin-left: 50px; margin-right: 50px;">下单时间：<%= order.created_at.to_s(:db) %></small>
+							<small><%= link_to("订单详情", order_path(order.token)) %></small>
+							<small style="margin-left: 50px;">
+								<% if order.is_paid? %>
+								 <%= render_order_paid_state(order) %>： <%= render "account/orders/state_option", order: order %>
+								 <% else %>
+								  <%= render_order_paid_state(order) %> (<%= link_to("去付款", order_path(order.token)) %>)
+								 <% end %>
+							</small>
+						</span>
 				  <thead>
 				    <tr>
 				      <th>商品资讯</th>
 				      <th>价格</th>
 				      <th>数量</th>
-				      <th>小计</th>
+
 				    </tr>
 				  </thead>
 				  <tbody>
 						<% order.product_lists.each do |product_list| %>
 				    <tr>
-				      <td><%= product_list.product_name %></td>
+				      <td>
+								<%= product_list.product_name %>
+							</td>
 				      <td><%= product_list.product_price %></td>
 				      <td><%= product_list.quantity %></td>
-				      <td><%= product_list.product_price * product_list.quantity %></td>
+
 				    </tr>
+
 						<% end %>
 				  </tbody>
-
 				</table>
 			</div>
-
 			<% end %>
 		</div>
 	</div>
-
-
 </div>
