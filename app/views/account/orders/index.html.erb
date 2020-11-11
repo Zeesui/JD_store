@@ -9,7 +9,7 @@
 						<span>
 							<small>订单编号：<%= order.token %> </small>
 							<small style="margin-left: 50px; margin-right: 50px;">下单时间：<%= order.created_at.to_s(:db) %></small>
-							<small><%= link_to("订单详情", order_path(order.token)) %></small>
+							<small><%= link_to("订单详情", account_order_path(order.token)) %></small>
 							<small style="margin-left: 50px;">
 								<% if order.is_paid? %>
 								 <%= render_order_paid_state(order) %>： <%= render "account/orders/state_option", order: order %>

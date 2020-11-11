@@ -1,0 +1,74 @@
+<div class="account-order-show">
+  <div class="col-md-12 contianer">
+    <h3>订单明细</h3>
+    <div class="account-order-content">
+      <h4>
+        收货信息
+        <br/>
+        <small>
+          <table class="table">
+            <tr>
+              <td><%= @order.name %></td>
+              <td><%= @order.cellphone %></td>
+              <td><%= @order.address %></td>
+            </tr>
+          </table>
+        </small>
+      </h4>
+      <hr>
+      <h4>
+        支付信息
+        <br/>
+        <small>
+          <table class="table">
+            <tr>
+              <td>实付金额：<%= @order.total %> ¥</td>
+              <td>支付方式：xxx</td>
+              <td>
+                <% if @order.is_paid? %>
+								 <%= render_order_paid_state(@order) %>
+                 <% else %>
+								  <%= render_order_paid_state(@order) %> (<%= link_to("去付款", order_path(@order.token)) %>)
+								 <% end %>
+              </td>
+              <td><%= render "account/orders/state_option", order: @order %></td>
+            </tr>
+          </table>
+        </small>
+      </h4>
+      <hr>
+      <div class="account-order-product-lists">
+        <table class="table table-shopping">
+          <thead>
+            <tr>
+
+              <th class="text-center" width="40%">商品名称</th>
+              <th>单价</th>
+              <th>数量</th>
+              <th>小计</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @product_lists.each do |product_list| %>
+              <tr>
+                <td>
+                  <%= image_tag(product_list.product_image, class: "account-order-image") %>
+                  <%= product_list.product_name %>
+                </td>
+                <td><%= product_list.product_price %></td>
+                <td><%= product_list.quantity %></td>
+                <td><%= product_list.product_price * product_list.quantity %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <hr>
+        <div class="account-order-price">
+          <span class="pull-right" style="margin-right: 100px;">
+            总计：<%= @order.total %> ¥
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
