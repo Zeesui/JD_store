@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>用户界面</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div class="container">
+    <%= render "common/navbar" %>
+    <div class="row">
+      <div class="col-md-2 admin-head-content">
+        <ul class="nav nav-pills nav-stacked" style="max-width: 300px;">
+          <li> <%= link_to("我的订单", account_orders_path) %> </li>
+          <li><%= link_to("我的收藏", account_collectes_path) %></li>
+        </ul>
+      </div>
+      <div class="admin-content col-md-10">
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
