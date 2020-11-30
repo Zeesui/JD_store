@@ -54,6 +54,7 @@ Rails.application.routes.draw do
         post :order_commit
       end
     end
+    resources :collectes
 	end
 
 end

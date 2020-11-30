@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
 
-
+#	respond_to :js, only: [:collected, :uncollected]
 
 	def index
 		@products = Product.all.order("id DESC")
