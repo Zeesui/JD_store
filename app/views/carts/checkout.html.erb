@@ -1,68 +1,78 @@
-<div class="row">
+<div class="row carts-index">
 	<div class="col-md-12">
-		<h2>购物明细</h2>
+		<div class="container">
+			<div class="card">
+				<%= simple_form_for @order do |f| %>
 
-      <%= simple_form_for @order do |f| %>
-		<table class="table table-bordered">
-      <thead>
-        <tr>
-          <th width="60%">商品明细</th>
-          <th>单价</th>
-          <th>数量</th>
-          <th>小计</th>
-        </tr>
-      </thead>
-      <tbody>
+			 <h2>收货信息</h2>
+			 <hr/>
+			 <div class="order-form">
+						 <div class="form-group col-md-4">
+							 <%= f.input :name, :label => "姓名" %>
+						 </div>
+						 <div class="form-group col-md-4">
+							 <%= f.input :cellphone, label: "电话" %>
+						 </div>
+						 <div class="form-group col-md-4">
+							 <%= f.input :address, label: "地址" %>
+						 </div>
+			 </div>
+			 <hr/>
+		 <table class="table table-shopping">
+			 <thead>
+				 <tr>
+					 <th>商品明细</th>
+					 <th>单价</th>
+					 <th>数量</th>
+					 <th>小计</th>
+				 </tr>
+			 </thead>
+			 <tbody>
 
-        <% @items.each do |cart_item| %>
-          <tr>
+				 <% @items.each do |cart_item| %>
+					 <tr>
+							 <input type="hidden" name="items[]" value="<%= cart_item.id %>">
+							 <td>
+								 <%= link_to product_path(cart_item.product) do %>
+											 <% if cart_item.product.image.present? %>
+												 <%= image_tag(cart_item.product.image.thumb.url, class: "thumbnail-carts") %>
+												 <% else %>
+													<%= image_tag("http://placehold.it/200x200&text=No Pic", class: "thumbnail-carts") %>
+											 <% end %>
+											 <%= cart_item.product.title %>
+								 <% end %>
 
-							<input type="hidden" name="items[]" value="<%= cart_item.id %>">
+							 </td>
 
+						 <td>
+							 <%= cart_item.product.price %>
+						 </td>
 
-            <td>
-              <%= link_to(cart_item.product.title, product_path(cart_item.product)) %>
-            </td>
-            <td>
-              <%= cart_item.product.price %>
-            </td>
+						 <td>
+							 <%= cart_item.quantity %>
+						 </td>
+						 <td>
+							 <%= cart_item.quantity * cart_item.product.price %>
+						 </td>
+					 </tr>
+				 <% end %>
 
-            <td>
-              <%= cart_item.quantity %>
-            </td>
-            <td>
-            	<%= cart_item.quantity * cart_item.product.price %>
-            </td>
+			 </tbody>
+		 </table>
+		 <hr>
+		 <tr>
+			 <td class="td-number">
+				 <span class="num" >
+					 总计：<%= render_cart_total_price(@items) %>
+				 </span>
+			 </td>
+			 <td>
+					<%= f.submit '生成订单', class: "btn btn-lg btn-danger pull-right", data: {disable_with: "稍后.."} %>
+			 </td>
+		 </tr>
 
-          </tr>
-        <% end %>
-
-      </tbody>
-    </table>
-    <div class="total">
-    	<span class="pull-right">
-    		总计：<%= render_cart_total_price(@items) %>
-    	</span>
-    </div>
-    <hr>
-    <h2>订单资讯</h2>
-    <div class="order-form">
-
-          <div class="form-group col-md-4">
-          	<%= f.input :name, :label => "姓名" %>
-          </div>
-          <div class="form-group col-md-4">
-          	<%= f.input :cellphone, label: "电话" %>
-          </div>
-          <div class="form-group col-md-4">
-          	<%= f.input :address, label: "地址" %>
-          </div>
-
-           <div class="checkout">
-           	<%= f.submit '生成订单', class: "btn btn-lg btn-danger pull-right", data: {disable_with: "稍后.."} %>
-           </div>
-
-    	<% end %>
-    </div>
+		 <% end %>
+			</div>
+		</div>
 	</div>
 </div>
