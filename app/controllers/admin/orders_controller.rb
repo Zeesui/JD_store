@@ -3,6 +3,8 @@ class Admin::OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :required_admin
 
+  layout "admin"
+
   def index
     @orders = Order.order("id DESC")
   end
