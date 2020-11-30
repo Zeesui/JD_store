@@ -7,6 +7,12 @@ class ApplicationController < ActionController::Base
 		end
 	end
 
+	def is_login?
+		if !current_user
+			redirect_to new_user_session_path, notice: "需要登陆才能收藏"
+		end
+	end
+
 	helper_method :current_cart
 
 	def current_cart

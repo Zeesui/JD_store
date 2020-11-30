@@ -10,6 +10,11 @@
 			<% end %>
 			<%= product.title %> ¥ <%= product.price %>
 			 <%= link_to("加入购物车", add_to_cart_product_path(product), :method => :post) %>
+			 <% if current_user && current_user.is_member_of(product) %>
+			 		<%= link_to('取消收藏', uncollected_product_path(product), :method => :post) %>
+					<% else %>
+					<%= link_to("加入收藏", collected_product_path(product), method: :post) %>
+			 <% end %>
 		</div>
 	<% end %>
 </div>
