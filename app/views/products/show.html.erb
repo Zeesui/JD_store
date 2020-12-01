@@ -1,28 +1,71 @@
 <div class="row">
-	<div class="col-md-6">
-		<% if @product.image.present? %>
-      <%= image_tag(@product.image.medium.url, class: "thumbnail") %>
-    <% else %>
-      <%= image_tag("http://placehold.it/400x400&text=No Pic", class: "thumbnail") %>
-    <% end %>
+	<div class="container">
+		<div class="col-md-6">
+			<% if @product.image.present? %>
+	      <%= image_tag(@product.image.medium.url, class: "thumbnail") %>
+	    <% else %>
+	      <%= image_tag("http://placehold.it/400x400&text=No Pic", class: "thumbnail") %>
+	    <% end %>
+		</div>
+		<div class="col-md-6">
+			<div class="text-center">
+				<h2><%= @product.title %></h2>
+
+				<div class="product-price" style="margin: 40px 40px;">
+					¥ <%= @product.price %>
+				</div>
+				<div class="product-quantity">
+					库存：<%= @product.quantity %>
+				</div>
+				<%= simple_form_for @product, method: :post, url: add_to_cart_product_path(@product) do |f| %>
+				<% if @product.quantity > 0 %>
+			 <div class="buy-quantity" style="margin: 40px 40px;">
+			  <%= link_to("-", "", id: "quantity-minus", class: "quantity-minus btn btn-default disabled") %>
+			  <%= f.input_field "", name: "quantity", value: '1', id: "quantity-input", class: "quantity-input" %>
+			  <%= link_to("+", "", id: "quantity-plus", class: "quantity-plus btn btn-default ") %>
+			 </div>
+			 <button type="submit" class="btn btn-warning <%= @product.quantity == 0 ? 'disabled' : '' %>">
+			  <%= fa_icon("cart-arrow-down", text: "加入购物车") %>
+			 </button>
+			 <% else %>
+			 <h3>库存不足！</h3>
+			<% end %>
+			<% end %>
+			</div>
+
+		</div>
 	</div>
-	<div class="col-md-6">
-		<h2><%= @product.title %></h2>
-		<div style="height: 100px;">
-			<p>
-				<%= @product.description %>
-			</p>
-		</div>
-		<div>数量：<%= @product.quantity %></div>
-		<div class="product-price">
-			¥ <%= @product.price %>
-		</div>
-		<% if @product.quantity > 0 %>
-		<div class="checkout">
-			<%= link_to("加入购物车", add_to_cart_product_path(@product), method: :post, class: "btn btn-danger btn-lg") %>
-		</div>
-		<% else %>
-		<h3>库存不足！</h3>
-		<% end %>
-	</div>
+
 </div>
+
+<script>
+	$(document).on('turbolinks:load', function(){
+
+		//增加商品数量
+  $("#quantity-plus").click(function(e) {
+    var max = parseInt($(".product-quantity").val());
+    var num = parseInt($("#quantity-input").val()) + 1;
+    $("#quantity-minus").removeClass("disabled");
+    if (num >= max) {
+      $("#quantity-input").val(max);
+      $("#quantity-plus").addClass('disabled');
+    } else {
+      $("#quantity-input").val(num);
+    }
+    e.preventDefault();
+  });
+
+	//减少商品数量
+	$("#quantity-minus").click(function(e){
+		var num = parseInt($("#quantity-input").val());
+		if (num > 1) {
+			$("#quantity-minus").removeClass("disabled");
+			$("#quantity-input").val(num -= 1);
+		} else {
+		  $("#quantity-minus").addClass("disabled");
+		}
+		e.preventDefault();
+	});
+
+	});
+</script>

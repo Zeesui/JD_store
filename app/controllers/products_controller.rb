@@ -12,8 +12,9 @@ class ProductsController < ApplicationController
 
 	def add_to_cart
 		@product = Product.find(params[:id])
+		@quantity = params[:quantity].to_i
 		if !current_cart.products.include?(@product)
-			current_cart.add_product_to_cart(@product)
+			current_cart.add_product_to_cart(@product, @quantity)
 			flash[:notice] = "加入购物车"
 		else
 			flash[:notice] = "#{@product.title}商品已经加入购物车"
