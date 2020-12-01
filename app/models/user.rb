@@ -12,7 +12,7 @@ class User < ApplicationRecord
 
          has_many :product_relationships
          has_many :favorited_products, :through => :product_relationships, :source => :product
-          # user.collected_products 用户收藏的商品
+          # user.favorited_products 用户收藏的商品
 
          #判断商品是否已收藏
           def is_member_of(product)
