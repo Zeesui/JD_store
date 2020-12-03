@@ -20,9 +20,10 @@ Rails.application.routes.draw do
 			post :add_to_cart
       post :collected
       post :uncollected
-		end
-    member do
       post :operations
+		end
+    collection do
+      get :search
     end
 	end
 

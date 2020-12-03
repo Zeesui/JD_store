@@ -1,51 +1,5 @@
 <div class=" product-index">
 	<% @products.each do |product| %>
-		<div class="col-xs-6 col-md-3">
-			<div class="card-image">
-				<%= link_to product_path(product) do %>
-					<% if product.image.present? %>
-						<%= image_tag(product.image.thumb.url, class: "thumbnail") %>
-						<% else %>
-						<%= image_tag("http://placehold.it/200x200&text=No Pic", class: "thumbnail") %>
-					<% end %>
-				<% end %>
-			</div>
-		<div class="card-content">
-			<div class="row">
-				<div class="col-xs-6">
-					<h4 class="product-title">
-						<%= link_to product.title, product_path(product) %>
-
-					</h4>
-				</div>
-				<div class="col-xs-6">
-
-						 ¥ <%= product.price %>
-
-				</div>
-
-			</div>
-
-				<div class="row">
-					<div class="col-xs-6">
-						<div class="product-content">
-							<% if current_user && current_user.is_member_of(product) %>
-		 	 			 		<%= link_to uncollected_product_path(product), :method => :post, class: "favorite" do %>
-		 	 					<%= mi.favorite %>
-		 	 					<% end %>
-		 	 					<% else %>
-		 	 					<%= link_to "加入收藏", collected_product_path(product), method: :post %>
-		 	 			 <% end %>
-						</div>
-					</div>
-					<div class="col-xs-6">
-						<div class="product-action">
-	 					 <%= link_to("加入购物车", add_to_cart_product_path(product), :method => :post) %>
-	 	 			 </div>
-					</div>
-
-				</div>
-		</div>
-		</div>
+	<%= render 'index_bar', product: product %>
 	<% end %>
 </div>

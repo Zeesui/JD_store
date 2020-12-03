@@ -18,11 +18,11 @@
 					库存：<%= @product.quantity %>
 				</div>
 				<%= simple_form_for @product, method: :post, url: operations_product_path(@product) do |f| %>
-				
+
 				<% if @product.quantity > 0 %>
 			 <div class="buy-quantity" style="margin: 40px 40px;">
 			  <%= link_to("-", "", id: "quantity-minus", class: "quantity-minus btn btn-default disabled") %>
-			  <%= f.input_field "", name: "quantity", value: '1', max: @product.quantity, id: "quantity-input", class: "quantity-input" %>
+			  <%= f.input_field "", name: "quantity", value: '1', max: @product.quantity, id: "quantity-input"%>
 			  <%= link_to("+", "", id: "quantity-plus", class: "quantity-plus btn btn-default ") %>
 			 </div>
 			 <div class="operations">

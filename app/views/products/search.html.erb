@@ -1,0 +1,23 @@
+<div class="product-box">
+  <div class="container">
+    <% if @query_string.blank? %>
+    <br>
+    <div class="page-box" style="margin-bottom: 400px;">
+      <h3>Opps! No any results matched, please try again.</h3>
+    </div>
+    <% elsif @products.blank? %>
+    <br>
+    <div class="page-box" style="margin-bottom: 400px;">
+      <h3>没有搜索到商品，换个关键词试试。</h3>
+    </div>
+    <% else %>
+     <h4>找到<%= @products.count %>个商品</h4>
+    <div class="product-page">
+      <% @products.each do |product| %>
+      <%= render 'index_bar', product: product %>
+      
+      <% end %>
+    </div>
+    <% end %>
+  </div>
+</div>

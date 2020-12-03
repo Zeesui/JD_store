@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
 
-#	respond_to :js, only: [:collected, :uncollected]
+	before_action :validate_search_key, only: [:search]
 
 	def index
 		@products = Product.all.order("id DESC")
@@ -61,5 +61,23 @@ class ProductsController < ApplicationController
 		current_user.uncollected_product!(@product)
 		flash[:notice] = "取消收藏"
 		back_url
+	end
+
+	def search
+		if @query_string.present?
+			search_result = Product.ransack(@search_criteria).result(:distinct => true)
+			@products = search_result.paginate(:page => params[:page], :per_page => 10)
+		end
+	end
+
+	protected
+
+	def validate_search_key
+		@query_string = params[:q].gsub(/\\|\'|\/|\?/, "") if params[:q].present?
+		@search_criteria = search_criteria(@query_string)
+	end
+
+	def search_criteria(query_string)
+		{title_or_description_cont: query_string}
 	end
 end

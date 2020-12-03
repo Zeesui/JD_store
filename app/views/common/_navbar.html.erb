@@ -3,7 +3,24 @@
 		<div class="navbar-header">
 			<a href="/" class="navbar-brand">JDstore</a>
 		</div>
+
+		<!-- 搜索栏 -->
+		<div class="nav navbar-nav navbar-default">
+    	<%= form_tag search_products_path, :method => :get do %>
+		 <div class="input-group" id="search-id" style="width: 300px;" >
+				<input type="text" class="form-control" name="q" value="<%= params[:q] %>" placeholder="搜索.." >
+					<div class="input-group-btn">
+						 <button class="btn btn-default" type="submit">
+								<i class="glyphicon glyphicon-search"></i>
+						 </button>
+					</div>
+			</div>
+	 <% end %>
+	</div>
+	 <!-- 搜索栏 -->
+
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
 			<ul class="nav navbar-nav navbar-right">
 				<li>
 					<%= link_to carts_path do %>
