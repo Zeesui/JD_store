@@ -10,6 +10,25 @@ class ProductsController < ApplicationController
 		@product = Product.find(params[:id])
 	end
 
+	def operations
+		@product = Product.find(params[:id])
+		@quantity = params[:quantity].to_i
+
+ 		case params[:option]
+		when "add_to_cart"
+			if !current_cart.products.include?(@product)
+				current_cart.add_product_to_cart(@product, @quantity)
+				flash[:notice] = "加入购物车"
+			else
+				flash[:notice] = "#{@product.title}商品已经加入购物车"
+			end
+			back_url
+		 # when "order_now"
+		 #
+     #   redirect_to checkout_cart_path
+		  end
+	end
+
 	def add_to_cart
 		@product = Product.find(params[:id])
 		@quantity = params[:quantity].to_i

@@ -18,7 +18,8 @@ class OrdersController < ApplicationController
 				product_list.quantity = item.quantity
 				product_list.save
 			end
-			OrderMailer.notify_order_placed(@order).deliver!
+			OrderMailer.notify_order_placed(@order).deliver! #下单发送通知信
+			@items.destroy_all
 			redirect_to order_path(@order.token)
 		else
 			render 'carts/checkout'

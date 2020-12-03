@@ -29,30 +29,30 @@
 			 </thead>
 			 <tbody>
 
-				 <% @items.each do |cart_item| %>
+				 <% @items.each do |item| %>
 					 <tr>
-							 <input type="hidden" name="items[]" value="<%= cart_item.id %>">
+							 <input type="hidden" name="items[]" value="<%= item.id %>">
 							 <td>
-								 <%= link_to product_path(cart_item.product) do %>
-											 <% if cart_item.product.image.present? %>
-												 <%= image_tag(cart_item.product.image.thumb.url, class: "thumbnail-carts") %>
+								 <%= link_to product_path(item.product) do %>
+											 <% if item.product.image.present? %>
+												 <%= image_tag(item.product.image.thumb.url, class: "thumbnail-carts") %>
 												 <% else %>
 													<%= image_tag("http://placehold.it/200x200&text=No Pic", class: "thumbnail-carts") %>
 											 <% end %>
-											 <%= cart_item.product.title %>
+											 <%= item.product.title %>
 								 <% end %>
 
 							 </td>
 
 						 <td>
-							 <%= cart_item.product.price %>
+							 <%= item.product.price %>
 						 </td>
 
 						 <td>
-							 <%= cart_item.quantity %>
+							 <%= item.quantity %>
 						 </td>
 						 <td>
-							 <%= cart_item.quantity * cart_item.product.price %>
+							 <%= item.quantity * item.product.price %>
 						 </td>
 					 </tr>
 				 <% end %>

@@ -17,16 +17,23 @@
 				<div class="product-quantity">
 					库存：<%= @product.quantity %>
 				</div>
-				<%= simple_form_for @product, method: :post, url: add_to_cart_product_path(@product) do |f| %>
+				<%= simple_form_for @product, method: :post, url: operations_product_path(@product) do |f| %>
+				
 				<% if @product.quantity > 0 %>
 			 <div class="buy-quantity" style="margin: 40px 40px;">
 			  <%= link_to("-", "", id: "quantity-minus", class: "quantity-minus btn btn-default disabled") %>
-			  <%= f.input_field "", name: "quantity", value: '1', id: "quantity-input", class: "quantity-input" %>
+			  <%= f.input_field "", name: "quantity", value: '1', max: @product.quantity, id: "quantity-input", class: "quantity-input" %>
 			  <%= link_to("+", "", id: "quantity-plus", class: "quantity-plus btn btn-default ") %>
 			 </div>
-			 <button type="submit" class="btn btn-warning <%= @product.quantity == 0 ? 'disabled' : '' %>">
-			  <%= fa_icon("cart-arrow-down", text: "加入购物车") %>
-			 </button>
+			 <div class="operations">
+				 <button type="submit" name="option" value="add_to_cart" class="btn btn-warning  <%= @product.quantity == 0 ? 'disabled' : '' %>">
+  			  <%= fa_icon("cart-arrow-down", text: "加入购物车") %>
+  			 </button>
+				 <!-- <button type="submit" name="option" value="order_now" class="btn btn-danger">
+					  <%= fa_icon("cart-arrow-down", text: "立刻下单") %>
+				 </button> -->
+			 </div>
+
 			 <% else %>
 			 <h3>库存不足！</h3>
 			<% end %>
@@ -43,26 +50,29 @@
 
 		//增加商品数量
   $("#quantity-plus").click(function(e) {
-    var max = parseInt($(".product-quantity").val());
-    var num = parseInt($("#quantity-input").val()) + 1;
+    var max = parseInt($("#quantity-input").attr('max'));
+    var num = parseInt($("#quantity-input").val());
     $("#quantity-minus").removeClass("disabled");
-    if (num >= max) {
-      $("#quantity-input").val(max);
+    if (num == max) {
+    //  $("#quantity-input").val(max);
       $("#quantity-plus").addClass('disabled');
     } else {
-      $("#quantity-input").val(num);
+      $("#quantity-input").val(num += 1);
     }
     e.preventDefault();
   });
 
 	//减少商品数量
 	$("#quantity-minus").click(function(e){
-		var num = parseInt($("#quantity-input").val());
+
+    var num = parseInt($("#quantity-input").val());
+		$("#quantity-minus").removeClass("disabled");
 		if (num > 1) {
-			$("#quantity-minus").removeClass("disabled");
+
 			$("#quantity-input").val(num -= 1);
 		} else {
 		  $("#quantity-minus").addClass("disabled");
+			$("#quantity-plus").removeClass('disabled');
 		}
 		e.preventDefault();
 	});
