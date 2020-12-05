@@ -11,6 +11,7 @@
 	<% end %>
 
 	<%= f.input :image, ad: :file, label: "上传图片" %>
+	<%= f.input :is_hidden, label: "下架商品" %>
 
 	<%= f.submit "编辑", data: {disable_with: "编辑.."} %>
 	<%= link_to("取消", :back, class: "btn btn-sm btn-default") %>

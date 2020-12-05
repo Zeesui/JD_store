@@ -45,10 +45,22 @@ class Admin::ProductsController < ApplicationController
 		redirect_to admin_products_path
 	end
 
+	def public
+		@product = Product.find(params[:id])
+		@product.public!
+		back_url
+	end
+
+	def hide
+		@product = Product.find(params[:id])
+		@product.hide!
+		back_url
+	end
+
 	private
 
 	def params_product
-		params.require(:product).permit(:title, :description, :price, :quantity, :image)
+		params.require(:product).permit(:title, :description, :price, :quantity, :image, :is_hidden)
 	end
 
 

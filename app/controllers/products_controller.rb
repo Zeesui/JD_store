@@ -3,11 +3,14 @@ class ProductsController < ApplicationController
 	before_action :validate_search_key, only: [:search]
 
 	def index
-		@products = Product.all.order("id DESC")
+		@products = Product.where(:is_hidden => false).order("id DESC")
 	end
 
 	def show
 		@product = Product.find(params[:id])
+		if @product.is_hidden
+			redirect_to root_path
+		end
 	end
 
 	def operations
