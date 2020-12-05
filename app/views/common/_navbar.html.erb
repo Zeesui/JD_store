@@ -7,7 +7,7 @@
 		<!-- 搜索栏 -->
 		<div class="nav navbar-nav navbar-default">
     	<%= form_tag search_products_path, :method => :get do %>
-		 <div class="input-group" id="search-id" style="width: 300px;" >
+		 <div class="input-group" id="search-id" style="width: 300px; padding-top: 10px;" >
 				<input type="text" class="form-control" name="q" value="<%= params[:q] %>" placeholder="搜索.." >
 					<div class="input-group-btn">
 						 <button class="btn btn-default" type="submit">

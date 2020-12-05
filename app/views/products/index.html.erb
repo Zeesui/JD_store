@@ -1,5 +1,8 @@
-<div class=" product-index">
-	<% @products.each do |product| %>
-	<%= render 'index_bar', product: product %>
-	<% end %>
+<div class="product-index">
+	<div class="container-fluid">
+		<% @products.each do |product| %>
+		<%= render 'index_bar', product: product %>
+		<% end %>
+	</div>
+
 </div>
