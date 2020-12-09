@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_05_072006) do
+ActiveRecord::Schema.define(version: 2020_12_09_063151) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "name"
@@ -18,8 +18,6 @@ ActiveRecord::Schema.define(version: 2020_12_05_072006) do
     t.string "address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
-    t.integer "order_id"
   end
 
   create_table "cart_items", force: :cascade do |t|
@@ -78,21 +76,6 @@ ActiveRecord::Schema.define(version: 2020_12_05_072006) do
     t.boolean "is_hidden", default: true
   end
 
-  create_table "ship_addresses", force: :cascade do |t|
-    t.integer "address_id"
-    t.integer "order_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "ship_items", force: :cascade do |t|
-    t.integer "cart_id"
-    t.integer "cart_item_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "order_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -102,6 +85,7 @@ ActiveRecord::Schema.define(version: 2020_12_05_072006) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "is_admin", default: false
+    t.string "user_name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

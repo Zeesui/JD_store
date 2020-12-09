@@ -1,7 +1,7 @@
 class Admin::OrdersController < ApplicationController
 
   before_action :authenticate_user!
-  before_action :required_admin
+#  before_action :required_admin
 
   layout "admin"
 
