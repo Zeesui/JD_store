@@ -1,7 +1,7 @@
 class Account::OrdersController < ApplicationController
 
 	before_action :authenticate_user!
-	before_action :find_order, only: [:show, :apply_to_cancell, :cancel, :order_commit, :]
+	before_action :find_order, only: [:show, :apply_to_cancell, :cancel, :order_commit]
 	layout "current_user"
 
 	def index
@@ -9,7 +9,7 @@ class Account::OrdersController < ApplicationController
 	end
 
 	def show
-		
+
 		@product_lists = @order.product_lists
 	end
 
