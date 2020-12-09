@@ -5,6 +5,6 @@ CarrierWave.configure do |config|
  config.qiniu_bucket        = ENV["jd-stroe"]
  config.qiniu_bucket_domain = ENV["https://portal.qiniu.com/cdn/domain/ql2av6kts.hn-bkt.clouddn.com"]
  config.qiniu_block_size    = 4*1024*1024
- config.qiniu_protocol      = "http"
- config.qiniu_up_host       = "http://portal.qiniu.com"  #选择不同的区域时，"up.qiniu.com" 不同
+ config.qiniu_protocol      = "https"
+ config.qiniu_up_host       = "https://portal.qiniu.com"  #选择不同的区域时，"up.qiniu.com" 不同
 end
