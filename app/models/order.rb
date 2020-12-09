@@ -2,8 +2,14 @@ class Order < ApplicationRecord
 	belongs_to :user
 	has_many :product_lists
 
+
+	validates :name, presence: true
+  validates :address, presence: true
+  validates :cellphone, presence: true
+
 	before_create :generate_token
 
+	#订单编号
 	def generate_token
 		self.token = SecureRandom.uuid
 	end

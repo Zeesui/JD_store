@@ -1,6 +1,7 @@
 class Account::OrdersController < ApplicationController
 
 	before_action :authenticate_user!
+	before_action :find_order, only: [:show, :apply_to_cancell, :cancel, :order_commit, :]
 	layout "current_user"
 
 	def index
@@ -8,13 +9,13 @@ class Account::OrdersController < ApplicationController
 	end
 
 	def show
-		@order = Order.find_by_token(params[:id])
+		
 		@product_lists = @order.product_lists
 	end
 
 	#申请退货
 	def apply_to_cancell
-		@order = Order.find_by_token(params[:id])
+
 		@order.apply_to_cancelled!
 		flash[:notice] = "申请退货"
 		back_url
@@ -22,15 +23,21 @@ class Account::OrdersController < ApplicationController
 
 	#取消订单
 	def cancell
-		@order = Order.find_by_token(params[:id])
+
 		@order.cancell_order!
 		back_url
 	end
 
 	#确认收货
 	def order_commit
-		@order = Order.find_by_token(params[:id])
+
 		@order.good_shipped!
 		back_url
+	end
+
+	private
+
+	def find_order
+			@order = Order.find_by_token(params[:id])
 	end
 end

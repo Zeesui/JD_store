@@ -15,13 +15,13 @@ class CartsController < ApplicationController
 	end
 
 	def checkout
-		if params[:item_ids].present?
-			@items = []
+		@items = []
+		if params[:item_ids].present?		
 	    params[:item_ids].each do |item_id|
 	      @items << CartItem.find(item_id)
 	    end
 		else
-		
+
 		end
 		@order = Order.new
 	end

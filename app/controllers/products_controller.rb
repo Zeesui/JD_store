@@ -1,20 +1,21 @@
 class ProductsController < ApplicationController
 
 	before_action :validate_search_key, only: [:search]
+	before_action :find_option, only: [:show, :operations, :add_to_cart, :collected, :uncollected_product]
 
 	def index
 		@products = Product.where(:is_hidden => false).order("id DESC")
 	end
 
 	def show
-		@product = Product.find(params[:id])
+
 		if @product.is_hidden
 			redirect_to root_path
 		end
 	end
 
 	def operations
-		@product = Product.find(params[:id])
+
 		@quantity = params[:quantity].to_i
 
  		case params[:option]
@@ -33,7 +34,7 @@ class ProductsController < ApplicationController
 	end
 
 	def add_to_cart
-		@product = Product.find(params[:id])
+
 		@quantity = params[:quantity].to_i
 		if !current_cart.products.include?(@product)
 			current_cart.add_product_to_cart(@product, @quantity)
@@ -45,7 +46,7 @@ class ProductsController < ApplicationController
 	end
 
 	def collected
-		@product = Product.find(params[:id])
+
 		if current_user
 			if current_user.is_member_of(@product)
 				flash[:notice] = "#{@product.title} 已经收藏"
@@ -60,12 +61,13 @@ class ProductsController < ApplicationController
 	end
 
 	def uncollected
-		@product = Product.find(params[:id])
+
 		current_user.uncollected_product!(@product)
 		flash[:notice] = "取消收藏"
 		back_url
 	end
 
+	#搜索栏
 	def search
 		if @query_string.present?
 			search_result = Product.ransack(@search_criteria).result(:distinct => true)
@@ -82,5 +84,9 @@ class ProductsController < ApplicationController
 
 	def search_criteria(query_string)
 		{title_or_description_cont: query_string}
+	end
+
+	def find_option
+		@product = Product.find(params[:id])
 	end
 end
