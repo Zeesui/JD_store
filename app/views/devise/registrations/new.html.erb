@@ -1,0 +1,25 @@
+<div class="container-fluid">
+  <div class="col-md-4 col-md-offset-4" style="margin-top: 30px; margin-bottom: 40px;">
+    <b style="margin-bootom: 2em">注册账号</b>
+    <div class="registration-detail">
+      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= f.error_notification %>
+
+      <div class="form-inputs">
+        <%= f.input :user_name, required: false, placeholder: "User name", input_html: {class: "form-control input-lg"} %>
+        <%= f.input :email, required: false, autofocus: true, placeholder: "Email", input_html: {class: "form-control input-lg"} %>
+        <%= f.input :password, required: false, hint: ("#{@minimum_password_length} characters
+                  minimum" if @minimum_password_length), input_html: {class: "form-control input-lg"}, placeholder: "Password" %>
+              <%= f.input :password_confirmation, input_html: {class: "form-control input-lg"}, placeholder: "Password Confirmation" %>
+      </div>
+      <hr>
+      <div class="form-actions text-center">
+        <%= f.submit "注册账号", class: "btn btn-success btn-lg" %>
+      </div>
+      <% end %>
+    </div>
+    <span class="pull-right">
+      已有账号, <%= render 'devise/shared/links' %>
+    </span>
+  </div>
+</div>
