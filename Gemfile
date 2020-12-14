@@ -49,8 +49,12 @@ gem 'ransack'
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
 gem 'seo_helper'
-gem 'carrierwave-qiniu'
-gem 'qiniu', '~> 6.8.1'
+
+#七牛图片云储存
+gem 'carrierwave-qiniu', '~> 1.2.2'
+gem 'carrierwave-i18n' # If you need to use locales other than English
+gem 'qiniu', '>= 6.9.0'
+
 gem 'figaro'
 
 
