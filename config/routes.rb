@@ -5,6 +5,9 @@ Rails.application.routes.draw do
 
 	namespace :admin do
 		resources :products do
+      collection do
+        get 'create', as: :create
+      end
       member do
         post :public
         post :hide

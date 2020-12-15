@@ -1,0 +1,5 @@
+# Logfile created on 2020-12-15 11:38:32 +0800 by logger.rb/61378
+I, [2020-12-15T11:38:32.624498 #14899]  INFO -- : Begin list buckets, options: {}
+I, [2020-12-15T11:45:20.125769 #14899]  INFO -- : Begin create bucket, name: jdstore-demo, opts: {}
+I, [2020-12-15T11:57:01.185223 #15217]  INFO -- : Begin create bucket, name: jdstore-demo, opts: {}
+I, [2020-12-15T11:58:28.642343 #15217]  INFO -- : Begin list buckets, options: {}

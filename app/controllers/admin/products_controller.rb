@@ -15,7 +15,7 @@ class Admin::ProductsController < ApplicationController
 	end
 
 	def create
-
+	
 		@product = Product.new(params_product)
 		if @product.save
 			redirect_to admin_products_path
@@ -61,7 +61,7 @@ class Admin::ProductsController < ApplicationController
 
 	private
 
-	
+
 
 	def params_product
 		params.require(:product).permit(:title, :description, :price, :quantity, :image, :is_hidden)

@@ -57,6 +57,8 @@ gem 'qiniu', '>= 6.9.0'
 
 gem 'figaro'
 
+#阿里云储存
+gem 'aliyun-sdk', '~> 0.6.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
