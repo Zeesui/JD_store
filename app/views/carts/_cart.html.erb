@@ -15,7 +15,11 @@
 </thead>
 <tbody>
 <% current_cart.cart_items.each_with_index do |cart_item, index| %>
+  <% if cart_item.product.present? && !cart_item.product.is_hidden %>
        <%= render "cart_content", cart_item: cart_item, index: index %>
+  <% else %>
+      <%= render "product_blank", cart_item: cart_item, index: index %>
+<% end %>
 <% end %>
 </tbody>
      </table>

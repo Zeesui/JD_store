@@ -1,6 +1,10 @@
 class Product < ApplicationRecord
 	mount_uploader :image, ImageUploader
 
+	validates :title, presence: true
+  validates :quantity, presence: true
+  validates :price, presence: true
+
 	has_many :cart_items
 	has_many :product_relationships
   has_many :members, :through => :product_relationships, :source => :user
